@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  capacity: 1
+  year_of_construction: 1
+  city: MyString
+
+two:
+  name: MyString
+  capacity: 1
+  year_of_construction: 1
+  city: MyString

@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  firstname: MyString
+  lastname: MyString
+  commonname: MyString
+  position: MyString
+  birthdate: 2015-01-24
+  overallrating: 1
+  potential: 1
+  club_id: 1
+  nationality: MyString
+
+two:
+  firstname: MyString
+  lastname: MyString
+  commonname: MyString
+  position: MyString
+  birthdate: 2015-01-24
+  overallrating: 1
+  potential: 1
+  club_id: 1
+  nationality: MyString
