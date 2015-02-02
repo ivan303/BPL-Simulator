@@ -1,0 +1,9 @@
+.my_club
+  = @chosenClub.name
+.row
+  .col-lg-10.col-lg-offset-1
+    %table.table
+      -@chosenClub.players.each do |player|
+        %tr
+          %td= player.lastname
+          %td= player.overallrating

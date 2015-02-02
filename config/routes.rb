@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get '/choose_team', to: 'choose_team#show' #, as: ''
   post '/choose_team', to: 'choose_team#create'
 
+
+  get '/team_management', to: 'team_management#show'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

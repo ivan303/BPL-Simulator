@@ -1,0 +1,27 @@
+<h1>Choose team</h1>
+
+.row
+  .col-lg-10.col-lg-offset-1
+    %table.table
+      %tr
+        %td 
+      -clubs.each do |club|
+        %tr
+          %td= club.name
+          %td= club.stadion.name
+
+
+
+
+
+.form_div
+  = form_for :clubs do |f|
+    = f.collection_select(:id, Club.all, :id, :name, prompt: true)
+    = f.submit 'Submit'
+
+/ .form_div
+/   = simple_form_for clubs do |f|
+/     = f.submit 'Save'  
+//  = collection_select(:club, :name, Club.all, :id, :name, prompt: true)
+
+/ .tema_select= collection_select(:club, :name, Club.all, :id, :name, prompt: true)
