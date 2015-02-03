@@ -1,9 +1,16 @@
 class TeamManagementController < ApplicationController
+	
+	expose(:player)
+	expose(:players)
+	
 	def show
-		Club.all.each do |c|
-			if c.chosen
-				@chosenClub = c
-			end
-		end
+		#byebug
+		@info = SeasonInfo.first
+		
+		@chosenClub = Club.find_by(name: @info.club_name)
 	end	
+
+	def simulate
+		byebug
+	end
 end

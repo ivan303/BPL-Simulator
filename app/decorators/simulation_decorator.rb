@@ -1,10 +1,5 @@
-class TeamManagementDecorator < Draper::Decorator
+class SimulationDecorator < Draper::Decorator
   delegate_all
-
-  def player_name
-  	name = player.commonname || player.firstname + player.lastname
-  end
-
 
   # Define presentation-specific methods here. Helpers are accessed through
   # `helpers` (aka `h`). You can override attributes, for example:

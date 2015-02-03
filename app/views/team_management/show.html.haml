@@ -1,5 +1,7 @@
-.my_club
-  = @chosenClub.name
+.my_club_from_table
+  = @info.club_name
+.round
+  = @info.round
 .row
   .col-lg-10.col-lg-offset-1
     %table.table
@@ -7,3 +9,20 @@
         %tr
           %td= player.lastname
           %td= player.overallrating
+          %td= TeamManagementController.helpers.player_name player
+
+
+.form.form-group
+  = form_for :players, url: simulation_path do |p|
+    = p.collection_select :id_1, @chosenClub.players, :id, :lastname, {prompt: "Select goalkeeper"}, class: "form-control" 
+    = p.collection_select :id_2, @chosenClub.players, :id, :lastname, {prompt: "Select back"}, class: "form-control" 
+    = p.collection_select :id_3, @chosenClub.players, :id, :lastname, {prompt: "Select back"}, class: "form-control"
+    = p.collection_select :id_4, @chosenClub.players, :id, :lastname, {prompt: "Select back"}, class: "form-control"
+    = p.collection_select :id_5, @chosenClub.players, :id, :lastname, {prompt: "Select back"}, class: "form-control"
+    = p.collection_select :id_6, @chosenClub.players, :id, :lastname, {prompt: "Select midfielder"}, class: "form-control"
+    = p.collection_select :id_7, @chosenClub.players, :id, :lastname, {prompt: "Select midfielder"}, class: "form-control"
+    = p.collection_select :id_8, @chosenClub.players, :id, :lastname, {prompt: "Select midfielder"}, class: "form-control"
+    = p.collection_select :id_9, @chosenClub.players, :id, :lastname, {prompt: "Select midfielder"}, class: "form-control"
+    = p.collection_select :id_10, @chosenClub.players, :id, :lastname, {prompt: "Select striker"}, class: "form-control"
+    = p.collection_select :id_11, @chosenClub.players, :id, :lastname, {prompt: "Select striker"}, class: "form-control"
+    = p.submit 'Simulate'

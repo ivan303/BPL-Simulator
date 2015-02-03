@@ -13,12 +13,18 @@ class ChooseTeamController < ApplicationController
 				selected = true
 			end
 		end
+		#byebug
 		if !selected
 			@club = Club.find(params[:clubs][:id])
 			@club.update(chosen: true)
-			render 'choose_team/show'
+
+			@info = SeasonInfo.first
+			@info.update(club_name: @club[:name], round: 1)
+
+			#render 'team_management/show'
+			redirect_to team_management_path
 		else
-			render 'choose_team/show'
+			redirect_to team_management_path
 		end
 	end
 end
