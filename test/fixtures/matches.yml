@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  result: MyString
+  host_goals: 1
+  visitor_goals: 1
+  host_club_id: 1
+  visitior_club_id: 1
+
+two:
+  result: MyString
+  host_goals: 1
+  visitor_goals: 1
+  host_club_id: 1
+  visitior_club_id: 1
