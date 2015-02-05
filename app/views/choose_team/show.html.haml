@@ -14,10 +14,19 @@
 
 
 
+/ .form_div
+/   = form_for :clubs do |f|
+/     = f.collection_select(:id, Club.all, :id, :name, prompt: true)
+/     = f.submit 'Submit'
+
+
 .form_div
-  = form_for :clubs do |f|
-    = f.collection_select(:id, Club.all, :id, :name, prompt: true)
-    = f.submit 'Submit'
+  = simple_form_for :clubs do |f|
+    
+    .inputs
+      = f.input :id, as: :radio_buttons, collection: Club.all, label_method: lambda { |club| "#{club.name}, #{club.stadion.name}"}   
+    .actions
+      = f.button :submit
 
 / .form_div
 /   = simple_form_for clubs do |f|
