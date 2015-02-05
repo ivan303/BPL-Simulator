@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150203153031) do
+ActiveRecord::Schema.define(version: 20150205150004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,26 +63,9 @@ ActiveRecord::Schema.define(version: 20150203153031) do
   create_table "schedules", force: true do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "0"
-    t.string   "1"
-    t.string   "2"
-    t.string   "3"
-    t.string   "4"
-    t.string   "5"
-    t.string   "6"
-    t.string   "7"
-    t.string   "8"
-    t.string   "9"
-    t.string   "10"
-    t.string   "11"
-    t.string   "12"
-    t.string   "13"
-    t.string   "14"
-    t.string   "15"
-    t.string   "16"
-    t.string   "17"
-    t.string   "18"
-    t.string   "19"
+    t.integer  "round"
+    t.integer  "host"
+    t.integer  "visitor"
   end
 
   create_table "season_infos", force: true do |t|

@@ -2,6 +2,21 @@ module ApplicationHelper
 	
 require 'smarter_csv'
 
+	def bootstrap_class_for flash_type
+		case flash_type
+			when "success"
+				"alert-success"
+			when "alert"
+				"alert-warning"
+			when "notice"
+				"alert-info"
+			when "error"
+				"alert-danger"
+			else
+				flash_type.to_s
+		end
+	end
+
 	def import_players_from_csv
 		options = {}
 		filename = "PLAYERSFINAL1.csv"
@@ -72,16 +87,16 @@ require 'smarter_csv'
 		end
 	end
 
-	def import_schedule filename
+	def import_schedule
+		filename = "SCHEDULE.csv"
+
 		options = {}
 		schedule = {}
 					
 		counter = 1
 		round = 1
 		SmarterCSV.process(filename, options) do |chunk|
-			#byebug
 
-			#chunk.each do |data|
 			if counter == 1
 				schedule[round] = {}
 			end
@@ -91,8 +106,32 @@ require 'smarter_csv'
 				counter = 1
 				round += 1
 			end
-			#end
 		end
+
+		schedule.each do |key, value|
+			value.each do |h, v|
+				hostRecord = Club.find_by(:name => h)
+				visitorRecord = Club.find_by(:name => v)
+				# if key == 1
+				# 	puts hostRecord[:id].to_s + ' ' + visitorRecord[:id].to_s
+				# end
+
+				Schedule.create!({
+					:round => key,
+					:host => hostRecord[:id],
+					:visitor => visitorRecord[:id]
+					})
+
+				# Schedule.create!({
+				# 	:round => key,
+				# 	:host => h,
+				# 	:visitor => v
+				# 	})
+			end
+		end
+
+
+
 		return schedule
 	end
 
