@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   post '/simulation', to: 'simulation#create'
   get '/simulation', to: 'simulation#show'
+
+  get '/league_result', to: 'league_result#show'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

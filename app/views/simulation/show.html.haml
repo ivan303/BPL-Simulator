@@ -1,1 +1,20 @@
 <h1>Simulation</h1>
+.container
+  -@matches.each do |match|
+    .row
+      .col-lg-5
+        %h3= Club.find(match[:host_club_id])[:name]
+      .col-lg-2
+        %h3= match[:host_goals].to_s + ' : ' + match[:visitor_goals].to_s
+      .col-lg-5
+        %h3= Club.find(match[:visitor_club_id])[:name]
+    .row
+      .col-lg-5
+        -@scorers[match[:id]][match[:host_club_id]].each do |p|
+          %h5= p
+      .col-lg-5.col-lg-offset-7
+        -@scorers[match[:id]][match[:visitor_club_id]].each do |p|
+          %h5= p    
+  .row
+    .col-lg-12
+      = link_to "Back to team management", team_management_path

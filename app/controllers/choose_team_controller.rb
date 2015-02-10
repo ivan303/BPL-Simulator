@@ -41,6 +41,7 @@ class ChooseTeamController < ApplicationController
    		#byebug
    		Club.all.each do |c|
    			c.update(chosen: false)
+   			c.update(points: 0, goals_scored: 0, goals_lost: 0)
    		end
 
    		# cleaning SeasonInfo record
@@ -51,6 +52,9 @@ class ChooseTeamController < ApplicationController
 
    		# cleaning player table e.g. injury
    		Player.all.each { |p| p.update(injury: false)}
+
+   		# cleaning scorer table 
+   		Scorer.delete_all
 
    		redirect_to choose_team_path, notice: 'Simulation succesfuly ended. You can start the new one'
 

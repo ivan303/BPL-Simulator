@@ -109,8 +109,20 @@ module SimulationHelper
 				record[:visitor_goals] = rand(record[:host_goals])
 				record[:host_club_id] = match[:host]
 				record[:visitor_club_id] = match[:visitor]
+				record[:round] = round
 
 				m = Match.create(record)
+
+				club = Club.find(match[:host])
+				club.points = club.points + 3
+				club.goals_scored = club.goals_scored + record[:host_goals]
+				club.goals_lost = club.goals_lost + record[:visitor_goals]
+				club.save
+
+				club = Club.find(match[:visitor])
+				club.goals_scored = club.goals_scored + record[:visitor_goals]
+				club.goals_lost = club.goals_lost + record[:host_goals]
+				club.save
 
 				scorers_and_injuries m[:id], record[:host_club_id], record[:visitor_club_id], record[:host_goals], record[:visitor_goals], players1, players2
 
@@ -120,8 +132,21 @@ module SimulationHelper
 				record[:visitor_goals] = record[:host_goals]
 				record[:host_club_id] = match[:host]
 				record[:visitor_club_id] = match[:visitor]
+				record[:round] = round
 
 				m = Match.create(record)
+
+				club = Club.find(match[:host])
+				club.points = club.points + 1
+				club.goals_scored = club.goals_scored + record[:host_goals]
+				club.goals_lost = club.goals_lost + record[:visitor_goals]
+				club.save
+
+				club = Club.find(match[:visitor])
+				club.points = club.points + 1
+				club.goals_scored = club.goals_scored + record[:visitor_goals]
+				club.goals_lost = club.goals_lost + record[:host_goals]
+				club.save
 
 				scorers_and_injuries m[:id], record[:host_club_id], record[:visitor_club_id], record[:host_goals], record[:visitor_goals], players1, players2
 
@@ -131,8 +156,20 @@ module SimulationHelper
 				record[:host_goals] = rand(record[:visitor_goals])
 				record[:host_club_id] = match[:host]
 				record[:visitor_club_id] = match[:visitor]
+				record[:round] = round
 
 				m = Match.create(record)
+
+				club = Club.find(match[:host])
+				club.goals_scored = club.goals_scored + record[:host_goals]
+				club.goals_lost = club.goals_lost + record[:visitor_goals]
+				club.save
+
+				club = Club.find(match[:visitor])
+				club.points = club.points + 3
+				club.goals_scored = club.goals_scored + record[:visitor_goals]
+				club.goals_lost = club.goals_lost + record[:host_goals]
+				club.save
 
 				scorers_and_injuries m[:id], record[:host_club_id], record[:visitor_club_id], record[:host_goals], record[:visitor_goals], players1, players2
 
@@ -187,11 +224,11 @@ module SimulationHelper
 			end
 		end
 
-		byebug
+		#byebug
 
 
 		for i in 1..host_goals
-			byebug
+			#byebug
 			scorer_position = rand(10)
 			case scorer_position
 			when 0..5
