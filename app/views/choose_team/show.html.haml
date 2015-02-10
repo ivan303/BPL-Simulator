@@ -1,14 +1,17 @@
-<h1>Choose team</h1>
-
 .row
   .col-lg-10.col-lg-offset-1
-    %table.table
+    %table.table.table-condensed
       %tr
-        %td 
-      -clubs.each do |club|
+        %th= 'Team'
+        %th= 'City'
+        %th= 'Stadion'
+        %th= 'Coach' 
+      -clubs.order(:name).each do |club|
         %tr
           %td= club.name
+          %td= club.stadion.city
           %td= club.stadion.name
+          %td= club.coach.firstname + ' ' + club.coach.lastname
 
 
 
@@ -19,14 +22,17 @@
 /     = f.collection_select(:id, Club.all, :id, :name, prompt: true)
 /     = f.submit 'Submit'
 
-
-.form_div
-  = simple_form_for :clubs do |f|
-    
-    .inputs
-      = f.input :id, as: :radio_buttons, collection: Club.all, label_method: lambda { |club| "#{club.name}, #{club.stadion.name}"}   
-    .actions
-      = f.button :submit
+.row
+  .col-lg-10.col-lg-offset-1
+    %h3= 'Choose team'
+.row
+  .col-lg-10.col-lg-offset-1
+    .form_div
+      = simple_form_for :clubs do |f|
+        .inputs
+          = f.input :id, as: :radio_buttons, collection: Club.all.order(:name), label_method: lambda { |club| "#{club.name}" }   
+        .actions
+          = f.button :submit
 
 / .form_div
 /   = simple_form_for clubs do |f|

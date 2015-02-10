@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   get '/choose_team', to: 'choose_team#show' #, as: ''
   post '/choose_team', to: 'choose_team#create'
-
+  delete '/choose_team', to: 'choose_team#destroy'
 
   get '/team_management', to: 'team_management#show'
 

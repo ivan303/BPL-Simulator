@@ -13,8 +13,15 @@ class SimulationController < ApplicationController
 		if all_players
 			unique_players = @players.values.uniq.length
 			if unique_players == 11
-				simulation @players
-				redirect_to simulation_path	
+				# check if chosen players doesn't have injury
+				without_injury = !@players.values.any? { |id| Player.find(id).injury }
+				if without_injury
+					simulation @players
+					redirect_to simulation_path	
+				else
+					flash[:error] = "You choosed at least one player with injury"
+					redirect_to team_management_path
+				end
 			else
 				flash[:error] = "You choosed the same player more than ones"
 				redirect_to team_management_path

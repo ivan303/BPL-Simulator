@@ -19,7 +19,7 @@ require 'smarter_csv'
 
 	def import_players_from_csv
 		options = {}
-		filename = "PLAYERSFINAL1.csv"
+		filename = "PLAYERSFINAL2.csv"
 		SmarterCSV.process(filename, options) do |chunk|
 			chunk.each do |data_hash|				
 				Player.create!({
@@ -58,7 +58,7 @@ require 'smarter_csv'
 
 	def import_coaches_from_csv
 		options = {}
-		filename = "COACHESFINAL.csv"
+		filename = "COACHESFINAL1.csv"
 		SmarterCSV.process(filename, options) do |chunk|
 			chunk.each do |data_hash|				
 				Coach.create!({

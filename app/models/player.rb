@@ -8,4 +8,6 @@ class Player < ActiveRecord::Base
 	validates_numericality_of :overallrating, :only_integer => true, :less_than_or_equal_to => 100
 	validates_numericality_of :potential, :only_integer => true, :less_than_or_equal_to => 100
 	validates_numericality_of :potential, :greater_than_or_equal_to => :overallrating
+
+	has_many :scorers
 end

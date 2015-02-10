@@ -1,15 +1,34 @@
-.my_club_from_table
-  = @info.club_name
-.round
-  = @info.round
+
 .row
   .col-lg-10.col-lg-offset-1
-    %table.table
-      -@chosenClub.players.each do |player|
-        %tr
-          %td= player.lastname
-          %td= player.overallrating
-          %td= TeamManagementController.helpers.player_name player
+    %h3 Round: #{@info.round}  
+/ .round
+  
+.row
+  .col-lg-10.col-lg-offset-1
+    %table.table.table-condensed
+      %tr
+        %th= 'Player name'
+        %th= 'Position'
+        %th= 'Overallrating'
+        %th= 'Has injury'
+      %tr.horizontal-divider 
+        %td
+        %td
+        %td
+        %td
+      -TeamManagementController.helpers.sort_by_position(@chosenClub.players).each do |position|
+        -position.each do |player|
+          %tr
+            %td= TeamManagementController.helpers.player_name player
+            %td= player.position
+            %td= player.overallrating
+            %td= player.injury
+        %tr.horizontal-divider 
+          %td
+          %td
+          %td
+          %td      
 
 
 .form.form-group

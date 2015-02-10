@@ -9,5 +9,6 @@ class Club < ActiveRecord::Base
 	has_many :host, :class_name => "Schedule", :foreign_key => :host
 	has_many :visitor, :class_name => "Schedule", :foreign_key => :visitor
 
+	has_many :scorers
 	
 end

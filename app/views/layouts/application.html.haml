@@ -25,6 +25,22 @@
     = javascript_include_tag 'application'
 
   %body
+    %nav.navbar.navbar-default.navbar-fixed-top
+      .container.col-lg-6.col-lg-offset-3
+        .navbar-header
+          -if SeasonInfo.first[:club_name]
+            %span.navbar-brand #{SeasonInfo.first[:club_name]}
+          -else
+            %span.navbar-brand Choose team
+        .navbar-collapse.collapse
+          %ul.nav.navbar-nav.navbar-right
+            -if SeasonInfo.first[:club_name]
+              %li.active
+                = link_to "End simulation", choose_team_path, method: "delete"
+
+
+
+
     .container           
       .row
         .col-lg-10.col-lg-offset-1
