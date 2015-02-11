@@ -169,4 +169,26 @@ require 'smarter_csv'
 		end
 	end
 
+	def update_players_costs
+		players = Player.all
+
+		players.each do |p|
+			offset = rand(10)+1
+			cost = 0
+			cost += (p.overallrating/90.0)*30000000
+			cost += (p.potential/90.0)*5000000
+			case offset
+			when 1..5
+				cost += offset*1000000
+			when 6..10
+				cost -= (offset-5)*1000000
+			end
+
+			cost = cost.round
+
+			p.update(cost: cost)
+
+		end
+	end
+
 end

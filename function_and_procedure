@@ -1,0 +1,45 @@
+CREATE OR REPLACE FUNCTION costs_sum(cid integer)
+RETURNS integer AS 
+sum integer $$
+BEGIN 
+sum := 0;
+FOR cur IN
+(SELECT cost FROM players
+WHERE club_id = cid)
+LOOP
+sum := sum + cur.cost;
+END LOOP;
+RETURN sum;
+END;
+$$ LANGUAGE plpgsql
+
+
+CREATE OR REPLACE FUNCTION costs_sum(cid integer) RETURNS integer AS $$ DECLARE sum integer; cur players%ROWTYPE;  BEGIN sum := 0; FOR cur IN (SELECT cost FROM players WHERE club_id = cid) LOOP sum := sum + cur.cost; END LOOP; RETURN sum; END; $$ LANGUAGE plpgsql
+
+CREATE OR REPLACE FUNCTION costs_sum(cid integer) RETURNS integer AS $$ DECLARE sum integer; cur players%ROWTYPE;  BEGIN sum := 0; FOR cur IN (SELECT cost FROM players WHERE club_id = cid AND id = 6) LOOP sum := sum + cur.cost; END LOOP; RETURN sum; END; $$ LANGUAGE plpgsql
+
+CREATE OR REPLACE FUNCTION costs_sum(cid integer) RETURNS integer AS $$ DECLARE sum integer; cur players%ROWTYPE;  BEGIN sum := 0; FOR cur IN (SELECT cost FROM players WHERE club_id = cid AND id = 6) LOOP sum := sum + cur.cost; END LOOP; RETURN sum; END; $$ LANGUAGE plpgsql
+
+// works - function to return sum of costs of all players from club
+CREATE OR REPLACE FUNCTION costs_sum(cid integer) RETURNS integer AS $$ DECLARE sum integer; BEGIN SELECT sum(cost) into sum FROM players WHERE club_id = cid; RETURN sum; END; $$ LANGUAGE plpgsql
+
+CREATE OR REPLACE FUNCTION transfer(clubfromid integer, clubtoid integer, playerid integer) 
+RETURNS void AS $$
+DECLARE cost integer; 
+BEGIN
+SELECT cost INTO cost
+FROM players WHERE id = playerid;
+UPDATE clubs
+SET budget = budget + cost
+WHERE id = clubfromid;
+UPDATE clubs
+SET budget = budget - cost
+WHERE id = clubtoid;
+UPDATE players
+SET club_id = clubtoid
+WHERE id = playerid;
+END; $$ LANGUAGE plpgsql
+
+
+//works - procedure to transfer player and update budgets
+CREATE OR REPLACE FUNCTION transfer(clubfromid integer, clubtoid integer, playerid integer) RETURNS void AS $$ DECLARE playercost integer; BEGIN SELECT cost INTO playercost FROM players WHERE id = playerid; UPDATE clubs SET budget = budget + playercost WHERE id = clubfromid; UPDATE clubs SET budget = budget - playercost WHERE id = clubtoid; UPDATE players SET club_id = clubtoid WHERE id = playerid; END; $$ LANGUAGE plpgsql
