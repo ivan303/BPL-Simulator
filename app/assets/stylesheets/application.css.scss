@@ -19,3 +19,7 @@ body {
 	padding-top: 70px;
 	padding-bottom: 70px;
 }
+
+.table-borderless td, .table-borderless tr {
+	border-top: none;
+}

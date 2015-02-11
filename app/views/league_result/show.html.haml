@@ -1,0 +1,16 @@
+.row
+  .col-lg-10.col-lg-offset-1
+    %table.table.table-condensed
+      %tr
+        %th= 'Position'
+        %th= 'Club'
+        %th= 'Points'
+        %th= 'Goals scored' 
+        %th= 'Goals lost'
+      -@results.each_with_index do |club, index|
+        %tr
+          %td= index+1
+          %td= club.name
+          %td= club.points
+          %td= club.goals_scored
+          %td= club.goals_lost

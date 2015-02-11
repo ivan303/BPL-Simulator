@@ -51,7 +51,7 @@ class ChooseTeamController < ApplicationController
    		Match.all.each { |m| m.delete }
 
    		# cleaning player table e.g. injury
-   		Player.all.each { |p| p.update(injury: false)}
+   		Player.where(injury: true).each { |p| p.update(injury: false) }
 
    		# cleaning scorer table 
    		Scorer.delete_all

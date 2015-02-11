@@ -34,20 +34,25 @@
 
 .form.form-group
   = form_for :players, url: simulation_path do |p|
-    %table.table
+    %table.table.table-borderless
       %tr
-        %td= p.collection_select :id_1, @chosenClub.players, :id, :lastname, {prompt: "Select goalkeeper"}, class: "form-control" 
+        %td
+        %td{"colspan" => 2, "data-halign" => "center"}= p.collection_select :id_1, @chosenClub.players, :id, lambda { |p| p.commonname ? "#{p.commonname}" : "#{p.firstname} #{p.lastname}"}, {prompt: "Select goalkeeper"}, class: "form-control"
+        %td 
       %tr
-        %td= p.collection_select :id_2, @chosenClub.players, :id, :lastname, {prompt: "Select back"}, class: "form-control" 
-        %td= p.collection_select :id_3, @chosenClub.players, :id, :lastname, {prompt: "Select back"}, class: "form-control"
-        %td= p.collection_select :id_4, @chosenClub.players, :id, :lastname, {prompt: "Select back"}, class: "form-control"
-        %td= p.collection_select :id_5, @chosenClub.players, :id, :lastname, {prompt: "Select back"}, class: "form-control"
+        %td= p.collection_select :id_2, @chosenClub.players, :id, lambda { |p| p.commonname ? "#{p.commonname}" : "#{p.firstname} #{p.lastname}"}, {prompt: "Select back"}, class: "form-control" 
+        %td= p.collection_select :id_3, @chosenClub.players, :id, lambda { |p| p.commonname ? "#{p.commonname}" : "#{p.firstname} #{p.lastname}"}, {prompt: "Select back"}, class: "form-control"
+        %td= p.collection_select :id_4, @chosenClub.players, :id, lambda { |p| p.commonname ? "#{p.commonname}" : "#{p.firstname} #{p.lastname}"}, {prompt: "Select back"}, class: "form-control"
+        %td= p.collection_select :id_5, @chosenClub.players, :id, lambda { |p| p.commonname ? "#{p.commonname}" : "#{p.firstname} #{p.lastname}"}, {prompt: "Select back"}, class: "form-control"
       %tr
-        %td= p.collection_select :id_6, @chosenClub.players, :id, :lastname, {prompt: "Select midfielder"}, class: "form-control"
-        %td= p.collection_select :id_7, @chosenClub.players, :id, :lastname, {prompt: "Select midfielder"}, class: "form-control"
-        %td= p.collection_select :id_8, @chosenClub.players, :id, :lastname, {prompt: "Select midfielder"}, class: "form-control"
-        %td= p.collection_select :id_9, @chosenClub.players, :id, :lastname, {prompt: "Select midfielder"}, class: "form-control"
+        %td= p.collection_select :id_6, @chosenClub.players, :id, lambda { |p| p.commonname ? "#{p.commonname}" : "#{p.firstname} #{p.lastname}"}, {prompt: "Select midfielder"}, class: "form-control"
+        %td= p.collection_select :id_7, @chosenClub.players, :id, lambda { |p| p.commonname ? "#{p.commonname}" : "#{p.firstname} #{p.lastname}"}, {prompt: "Select midfielder"}, class: "form-control"
+        %td= p.collection_select :id_8, @chosenClub.players, :id, lambda { |p| p.commonname ? "#{p.commonname}" : "#{p.firstname} #{p.lastname}"}, {prompt: "Select midfielder"}, class: "form-control"
+        %td= p.collection_select :id_9, @chosenClub.players, :id, lambda { |p| p.commonname ? "#{p.commonname}" : "#{p.firstname} #{p.lastname}"}, {prompt: "Select midfielder"}, class: "form-control"
       %tr
-        %td= p.collection_select :id_10, @chosenClub.players, :id, :lastname, {prompt: "Select striker"}, class: "form-control"
-        %td= p.collection_select :id_11, @chosenClub.players, :id, :lastname, {prompt: "Select striker"}, class: "form-control"
-    = p.submit 'Simulate'
+        %td
+        %td= p.collection_select :id_10, @chosenClub.players, :id, lambda { |p| p.commonname ? "#{p.commonname}" : "#{p.firstname} #{p.lastname}"}, {prompt: "Select striker"}, class: "form-control"
+        %td= p.collection_select :id_11, @chosenClub.players, :id, lambda { |p| p.commonname ? "#{p.commonname}" : "#{p.firstname} #{p.lastname}"}, {prompt: "Select striker"}, class: "form-control"
+        %td
+    = p.submit 'Simulate', class: 'btn btn-primary'
+

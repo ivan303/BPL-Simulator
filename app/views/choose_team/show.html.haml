@@ -13,15 +13,6 @@
           %td= club.stadion.name
           %td= club.coach.firstname + ' ' + club.coach.lastname
 
-
-
-
-
-/ .form_div
-/   = form_for :clubs do |f|
-/     = f.collection_select(:id, Club.all, :id, :name, prompt: true)
-/     = f.submit 'Submit'
-
 .row
   .col-lg-10.col-lg-offset-1
     %h3= 'Choose team'
@@ -33,10 +24,3 @@
           = f.input :id, as: :radio_buttons, collection: Club.all.order(:name), label_method: lambda { |club| "#{club.name}" }   
         .actions
           = f.button :submit
-
-/ .form_div
-/   = simple_form_for clubs do |f|
-/     = f.submit 'Save'  
-//  = collection_select(:club, :name, Club.all, :id, :name, prompt: true)
-
-/ .tema_select= collection_select(:club, :name, Club.all, :id, :name, prompt: true)

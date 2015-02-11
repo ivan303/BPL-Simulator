@@ -10,6 +10,9 @@ module SimulationHelper
 
 		matchesInRound = Schedule.where(round: round)
 
+		# remove injuries from previous round
+		Player.where(injury: true).each { |p| p.update(injury: false)}
+
 
 		players = {}
 		player_from_form.each do |key, ind|
@@ -201,6 +204,51 @@ module SimulationHelper
 		visitor_strikers = []
 		visitor_midfielders = []
 		visitor_defenders = []
+
+
+		# simulating injuries
+		injury = rand(8)
+		if injury == 0
+			offset1 = rand(11)
+			offset2 = rand(11)
+			while offset2 == offset1
+				offset2 = rand(11)
+			end
+			byebug
+
+			key1 = 'id_' + (offset1+1).to_s
+			key2 = 'id_' + (offset2+1).to_s
+			host_players[key1].update(injury: true)
+			host_players[key2].update(injury: true)
+		elsif injury == 1 or injury == 2
+			offset1 = rand(11)
+			byebug
+			key1 = 'id_' + (offset1+1).to_s
+			host_players[key1].update(injury: true)
+		end
+
+		injury = rand(8)
+		if injury == 0
+			offset1 = rand(11)
+			offset2 = rand(11)
+			while offset2 == offset1
+				offset2 = rand(11)
+			end
+			byebug
+
+
+			key1 = 'id_' + (offset1+1).to_s
+			key2 = 'id_' + (offset2+1).to_s
+			visitor_players[key1].update(injury: true)
+			visitor_players[key2].update(injury: true)
+		elsif injury == 1 or injury == 2
+			byebug
+			offset1 = rand(11)
+			key1 = 'id_' + (offset1+1).to_s
+			visitor_players[key1].update(injury: true)
+		end
+
+
 
 		host_players.each do |key, value|
 			case value[:position]
