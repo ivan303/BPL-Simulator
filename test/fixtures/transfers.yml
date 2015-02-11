@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  player_id: 1
+  sealing_club: 1
+  buying_club: 1
+  cost: 1
+
+two:
+  player_id: 1
+  sealing_club: 1
+  buying_club: 1
+  cost: 1

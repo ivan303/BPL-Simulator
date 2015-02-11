@@ -10,5 +10,8 @@ class Club < ActiveRecord::Base
 	has_many :visitor, :class_name => "Schedule", :foreign_key => :visitor
 
 	has_many :scorers
+
+	has_many :buying_club, :class_name => "Transfer", :foreign_key => :buying_club
+	has_many :sealing_club, :class_name => "Transfer", :foreign_key => :sealing_club
 	
 end

@@ -10,4 +10,6 @@ class Player < ActiveRecord::Base
 	validates_numericality_of :potential, :greater_than_or_equal_to => :overallrating
 
 	has_many :scorers
+
+	has_many :transfers
 end
