@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   get '/simulation', to: 'simulation#show'
 
   get '/league_result', to: 'league_result#show'
+
+  resources :clubs, only: [:show]
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

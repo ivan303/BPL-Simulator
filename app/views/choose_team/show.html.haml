@@ -5,13 +5,15 @@
         %th= 'Team'
         %th= 'City'
         %th= 'Stadion'
-        %th= 'Coach' 
+        %th= 'Coach'
+        %th= 'Details' 
       -clubs.order(:name).each do |club|
         %tr
           %td= club.name
           %td= club.stadion.city
           %td= club.stadion.name
           %td= club.coach.firstname + ' ' + club.coach.lastname
+          %td= link_to "Show", club_path(club[:id]), class: 'btn btn-primary'
 
 .row
   .col-lg-10.col-lg-offset-1

@@ -17,10 +17,10 @@
             %span.navbar-brand #{SeasonInfo.first[:club_name]}
           -else
             %span.navbar-brand Choose team
-        .navbar-collapse.collapse
+        .navbar-collapse.collapse{:id => "navigation"}
           %ul.nav.navbar-nav.navbar-right
-            %li.active
-              =link_to "Club", team_management_path
+            %li.active= link_to "Clubs", choose_team_path
+            %li.active=link_to "Club", team_management_path
             %li.dropdown.active
               %a.dropdown-toggle{href: "#", role: "button", "data-toggle" => "dropdown"}
                 = "Options"
