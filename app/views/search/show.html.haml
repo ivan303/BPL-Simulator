@@ -1,0 +1,24 @@
+.row
+  .col-lg-6.col-lg-offset-2
+    %h1 Search players
+
+    = form_tag players_path, method: 'get' do
+      .inputs
+        .form-group
+          = label_tag 'Player name'
+          = text_field_tag 'name', '', placeholder: 'At least fragment of player name', class: 'form-control'
+        / .form-group
+        /   = label_tag 'Rating'
+        /   = text_field_tag 'overallrating', '', placeholder: 'rating', class: 'form-control'
+        .form-group
+          = label_tag 'Rating boundaries'
+          = text_field_tag 'min_rating', '', placeholder: 'Minimum rating', class: 'form-control'
+          = text_field_tag 'max_rating', '', placeholder: 'Maximum raring', class: 'form-control'  
+        / .form-group
+        /   = label_tag 'Position'
+        /     .radio
+        /       = label_tag do
+        /         = radio_button_tag 'position', '', true
+        /         Any
+      .actions
+        = submit_tag "Search", name: nil, class: "btn btn-default"          

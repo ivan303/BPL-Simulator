@@ -1,0 +1,27 @@
+-if SeasonInfo.first.club_name
+  .row
+    .col-lg-12 
+      %h3= Club.find_by(name: SeasonInfo.first.club_name).budget
+.row
+  .col-lg-12
+    %table.table
+      %thead
+        %tr
+          %th Lastname
+          %th Position
+          %th Rating
+          %th Nationality
+          %th Cost
+          %th Offer
+
+      %tbody
+        - if not players.empty?
+          -players.each do |p|
+            %tr
+              %th= p.player_name_formatted   
+              %th= p.player_position_formatted
+              %th= p.overallrating
+              %th= p.nationality
+              %th= p.player_cost_formatted
+              -if SeasonInfo.first.club_name
+                %td= link_to "Deal", player_path(p.id), method: :put, class: 'btn btn-primary', data: { confirm: 'Are you sure you want to make on offer?'}

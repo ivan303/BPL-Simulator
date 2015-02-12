@@ -43,3 +43,15 @@ END; $$ LANGUAGE plpgsql
 
 //works - procedure to transfer player and update budgets
 CREATE OR REPLACE FUNCTION transfer(clubfromid integer, clubtoid integer, playerid integer) RETURNS void AS $$ DECLARE playercost integer; BEGIN SELECT cost INTO playercost FROM players WHERE id = playerid; UPDATE clubs SET budget = budget + playercost WHERE id = clubfromid; UPDATE clubs SET budget = budget - playercost WHERE id = clubtoid; UPDATE players SET club_id = clubtoid WHERE id = playerid; END; $$ LANGUAGE plpgsql
+
+
+CREATE OR REPLACE FUNCTION transfer(clubfromid integer, clubtoid integer, playerid integer) RETURNS void AS $$ DECLARE playercost integer;
+BEGIN SELECT cost INTO playercost FROM players WHERE id = playerid;
+UPDATE clubs SET budget = budget + playercost WHERE id = clubfromid;
+UPDATE clubs SET budget = budget - playercost WHERE id = clubtoid;
+UPDATE players SET club_id = clubtoid WHERE id = playerid; 
+INSERT INTO transfers(player_id, sealing_club, buying_club, cost) VALUES (playerid, clubfromid, clubtoid, playercost);
+END; $$ LANGUAGE plpgsql
+
+// works - newer version
+CREATE OR REPLACE FUNCTION transfer(clubfromid integer, clubtoid integer, playerid integer) RETURNS void AS $$ DECLARE playercost integer; BEGIN SELECT cost INTO playercost FROM players WHERE id = playerid; UPDATE clubs SET budget = budget + playercost WHERE id = clubfromid; UPDATE clubs SET budget = budget - playercost WHERE id = clubtoid; UPDATE players SET club_id = clubtoid WHERE id = playerid; INSERT INTO transfers(player_id, sealing_club, buying_club, cost) VALUES (playerid, clubfromid, clubtoid, playercost); END; $$ LANGUAGE plpgsql

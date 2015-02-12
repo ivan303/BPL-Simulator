@@ -17,6 +17,12 @@ Rails.application.routes.draw do
   get '/league_result', to: 'league_result#show'
 
   resources :clubs, only: [:show]
+
+  resources :players, only: [:index, :update]
+
+  get '/search', to: 'search#show'
+
+  
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
