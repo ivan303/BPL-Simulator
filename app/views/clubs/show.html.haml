@@ -1,1 +1,46 @@
-%h1= club.name
+/ %h1= club.name
+.row
+  .col-lg-5
+    .panel.panel-default
+      .panel-heading
+        %h1.panel-title{style: "text-align: center"}= club.name
+      .panel-body
+        %table.table
+          %tr
+            %td
+              %strong Coach
+            %td= Coach.find(club.coach_id).firstname + ' ' + Coach.find(club.coach_id).lastname
+          %tr
+            %td
+              %strong Budget
+            %td= number_to_currency(number_with_delimiter(club.budget, delimiter: "."), :unit => "£")
+          %tr
+            %td
+              %strong Stats
+            %td= club.stats
+          %tr
+            %td
+              %strong Established
+            %td= club.established
+  .col-lg-5
+    .panel.panel-default
+      .panel-heading
+        %h1.panel-title{style: "text-align: center"} Stadion info
+      .panel-body
+        %table.table
+          %tr
+            %td
+              %strong Name
+            %td= club.stadion.name
+          %tr
+            %td 
+              %strong City
+            %td= club.stadion.city
+          %tr
+            %td 
+              %strong Capacity
+            %td= club.stadion.capacity
+          %tr
+            %td
+              %strong Year of construction
+            %td= club.stadion.year_of_construction
