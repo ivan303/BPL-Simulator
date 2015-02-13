@@ -16,7 +16,7 @@
           -if SeasonInfo.first[:club_name]
             %span.navbar-brand #{SeasonInfo.first[:club_name]}
           -else
-            %span.navbar-brand Choose team
+            %span.navbar-brand Placeholder for your team
         .navbar-collapse.collapse{:id => "navigation"}
           %ul.nav.navbar-nav.navbar-right
             %li.active= link_to "Clubs", choose_team_path
@@ -29,6 +29,7 @@
               %ul.dropdown-menu
                 -if SeasonInfo.first[:club_name]
                   %li= link_to "Tabel", league_result_path
+                  %li= link_to "Transfers", transfers_path
                   %li= link_to "Search players", search_path
                   %li.divider
                   %li= link_to "End simulation", choose_team_path, method: "delete", data: { confirm: 'Are you sure you want to end simulation?'}

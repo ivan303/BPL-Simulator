@@ -1,7 +1,7 @@
 -if SeasonInfo.first.club_name
   .row
     .col-lg-12 
-      %h3= Club.find_by(name: SeasonInfo.first.club_name).budget
+      %h3= 'Your budget: ' + number_to_currency(number_with_delimiter(Club.find_by(name: SeasonInfo.first.club_name).budget, delimiter: "."), :unit => "£")
 .row
   .col-lg-12
     %table.table
@@ -10,6 +10,7 @@
           %th Lastname
           %th Position
           %th Rating
+          %th Club
           %th Nationality
           %th Cost
           %th Offer
@@ -21,6 +22,7 @@
               %th= p.player_name_formatted   
               %th= p.player_position_formatted
               %th= p.overallrating
+              %th= p.club.name
               %th= p.nationality
               %th= p.player_cost_formatted
               -if SeasonInfo.first.club_name

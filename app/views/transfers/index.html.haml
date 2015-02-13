@@ -1,0 +1,21 @@
+.row
+  .col-lg-4.col-lg-offset-4
+    %h2 Transfers list
+.row
+  .col-lg-10.col-lg-offset-1
+    %table.table
+      %thead
+        %tr
+          %th Player name
+          %th Old club
+          %th New club
+          %th Transfer cost
+      %tbody
+        -transfers.each do |t|
+          %tr
+            %th= t.player.player_name_formatted
+            %th= t.sealing_club.name
+            %th= t.buying_club.name
+            %th= t.player.player_cost_formatted
+
+

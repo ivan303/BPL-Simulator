@@ -175,7 +175,7 @@ require 'smarter_csv'
 		players.each do |p|
 			offset = rand(10)+1
 			cost = 0
-			cost += (p.overallrating/90.0)*30000000
+			cost += (p.overallrating/90.0)*20000000
 			cost += (p.potential/90.0)*5000000
 			case offset
 			when 1..5

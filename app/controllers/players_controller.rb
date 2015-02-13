@@ -43,6 +43,7 @@ class PlayersController < ApplicationController
 		filtered = filtered.search_rating(params['overallrating']) if params['overallrating'].present?
 		filtered = filtered.search_rating_min(params['min_rating']) if params['min_rating'].present?
 		filtered = filtered.search_rating_max(params['max_rating']) if params['max_rating'].present?
+		filtered = filtered.search_position(params['position']) if params['position'].present?
 
 		return filtered
 	end

@@ -181,7 +181,8 @@ module SimulationHelper
 			#byebug
 			puts result
 
-			# simulating injuries and scorers
+			# simulating transfers
+			make_transfers
 
 
 		end
@@ -190,11 +191,55 @@ module SimulationHelper
 
 
 
-		if SeasonInfo.first[:round] != 38
+		if SeasonInfo.first[:round] != 39
 			SeasonInfo.first.update(round: round+1)
 		else
 			# after last round
 		end
+	end
+
+	def make_transfers
+		my_club = Club.find_by(name: SeasonInfo.first.club_name)
+
+		my_club = Club.find(1)
+
+		players = Player.all.as_json
+
+		clubs = Club.all.where.not(id: my_club.id)
+
+		clubs.each do |c|
+
+			budget = c.budget
+			poss_players = []
+			players.each do |p|
+				if p["cost"] <= budget and p["club_id"] != c.id and p["position"] != "B"
+					poss_players << p
+				end
+			end
+
+			unless poss_players.empty?
+				player_index = rand(poss_players.length)
+				poss = rand(6)
+				if poss == 0
+					# all operation connected with transfer
+					club_from_id = poss_players[player_index]["club_id"]
+					club_to_id = c.id
+					player_id = poss_players[player_index]["id"]
+
+					
+					ActiveRecord::Base.connection.execute("SELECT transfer(#{club_from_id},#{club_to_id},#{player_id})")
+					#byebug
+				end
+			end
+
+
+			#puts c.name + ' ' + poss_players.length.to_s
+
+		end
+
+
+
+
 	end
 
 	def scorers_and_injuries match_id, host_id, visitor_id, host_goals, visitor_goals, host_players, visitor_players
@@ -214,7 +259,7 @@ module SimulationHelper
 			while offset2 == offset1
 				offset2 = rand(11)
 			end
-			byebug
+			#byebug
 
 			key1 = 'id_' + (offset1+1).to_s
 			key2 = 'id_' + (offset2+1).to_s
@@ -222,7 +267,7 @@ module SimulationHelper
 			host_players[key2].update(injury: true)
 		elsif injury == 1 or injury == 2
 			offset1 = rand(11)
-			byebug
+			#byebug
 			key1 = 'id_' + (offset1+1).to_s
 			host_players[key1].update(injury: true)
 		end
@@ -234,7 +279,7 @@ module SimulationHelper
 			while offset2 == offset1
 				offset2 = rand(11)
 			end
-			byebug
+			#byebug
 
 
 			key1 = 'id_' + (offset1+1).to_s
@@ -242,7 +287,7 @@ module SimulationHelper
 			visitor_players[key1].update(injury: true)
 			visitor_players[key2].update(injury: true)
 		elsif injury == 1 or injury == 2
-			byebug
+			#byebug
 			offset1 = rand(11)
 			key1 = 'id_' + (offset1+1).to_s
 			visitor_players[key1].update(injury: true)
@@ -344,6 +389,10 @@ module SimulationHelper
 			#byebug
 			#player = Player.find(value)
 			player = value
+
+			unless player
+				byebug
+			end
 
 			case player[:position]
 			when "B"

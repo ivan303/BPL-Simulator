@@ -39,10 +39,13 @@ class ChooseTeamController < ApplicationController
    		# all chosen column in clubs - false
 
    		#byebug
-   		Club.all.each do |c|
-   			c.update(chosen: false)
-   			c.update(points: 0, goals_scored: 0, goals_lost: 0)
-   		end
+   		# Club.all.each do |c|
+   		# 	c.update(chosen: false)
+   		# 	c.update(points: 0, goals_scored: 0, goals_lost: 0)
+   		# end
+   		Club.delete_all
+   		ApplicationController.helpers.import_clubs_from_csv
+   		ApplicationController.helpers.update_clubs_stats
 
    		# cleaning SeasonInfo record
    		SeasonInfo.first.update(round: 1, club_name: nil)
@@ -51,10 +54,18 @@ class ChooseTeamController < ApplicationController
    		Match.all.each { |m| m.delete }
 
    		# cleaning player table e.g. injury
-   		Player.where(injury: true).each { |p| p.update(injury: false) }
+   		#Player.where(injury: true).each { |p| p.update(injury: false) }
+   		
+   		# Commented to improve transition to new simulation
+   		#Player.delete_all
+   		#ApplicationController.helpers.import_players_from_csv
+   		#ApplicationController.helpers.update_players_costs
 
    		# cleaning scorer table 
    		Scorer.delete_all
+
+   		# cleaning transfer table
+   		Transfer.delete_all
 
    		redirect_to choose_team_path, notice: 'Simulation succesfuly ended. You can start the new one'
 

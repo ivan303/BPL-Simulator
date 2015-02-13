@@ -16,8 +16,15 @@ class SimulationController < ApplicationController
 				# check if chosen players doesn't have injury
 				without_injury = !@players.values.any? { |id| Player.find(id).injury }
 				if without_injury
-					simulation @players
-					redirect_to simulation_path	
+					# check if goalkeeper on his position
+					if Player.find(@players["id_1"]).position == "B"
+						byebug
+						simulation @players
+						redirect_to simulation_path	
+					else
+						flash[:error] = "You didn't put goalkeeper on his position"
+						redirect_to team_management_path
+					end
 				else
 					flash[:error] = "You choosed at least one player with injury"
 					redirect_to team_management_path

@@ -22,6 +22,8 @@ Rails.application.routes.draw do
 
   get '/search', to: 'search#show'
 
+  get '/transfers', to: 'transfers#index'
+
   
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

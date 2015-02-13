@@ -32,9 +32,21 @@ class Player < ActiveRecord::Base
 		where(['overallrating <= ?', rating.to_i])
 	end
 
-	# def player_name player
- #  		name = player.commonname || player.firstname + ' ' + player.lastname
- #  	end
+	def self.search_position(position)
+		case position
+		when 'goalkeeper'
+			pos = 'B'
+		when 'defender'
+			pos = 'O'
+		when 'midfielder'
+			pos = 'P'
+		when 'striker'
+			pos = 'N'
+		end
+
+		where(['position = ?', pos])
+	end
+	
 
  	def player_name_formatted
  		name = commonname || firstname + ' ' + lastname

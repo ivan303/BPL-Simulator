@@ -14,11 +14,23 @@
           = label_tag 'Rating boundaries'
           = text_field_tag 'min_rating', '', placeholder: 'Minimum rating', class: 'form-control'
           = text_field_tag 'max_rating', '', placeholder: 'Maximum raring', class: 'form-control'  
-        / .form-group
-        /   = label_tag 'Position'
-        /     .radio
-        /       = label_tag do
-        /         = radio_button_tag 'position', '', true
-        /         Any
+        .form-group
+          = label_tag 'Position'
+          .radio
+            = label_tag do
+              = radio_button_tag 'position', '', true
+              Any
+            = label_tag do
+              = radio_button_tag 'position', 'goalkeeper'
+              Goalkeeper
+            = label_tag do
+              = radio_button_tag 'position', 'defender'
+              Defender
+            = label_tag do
+              = radio_button_tag 'position', 'midfielder'
+              Midfielder
+            = label_tag do
+              = radio_button_tag 'position', 'striker'
+              Striker        
       .actions
         = submit_tag "Search", name: nil, class: "btn btn-default"          
