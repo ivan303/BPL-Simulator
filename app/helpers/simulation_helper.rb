@@ -322,13 +322,22 @@ module SimulationHelper
 
 		for i in 1..host_goals
 			#byebug
-			scorer_position = rand(10)
+			if host_strikers.length != 0 and host_midfielders.length != 0 and host_defenders.length !=0
+				scorer_position = rand(10)
+			elsif host_strikers.length == 0
+				scorer_position = rand(4) + 6
+			end
+				
+
+			#scorer_position = rand(10)
 			case scorer_position
 			when 0..5
 				num = rand(host_strikers.length)
+				byebug
 				Scorer.create({
 					match_id: match_id,
 					club_id: host_id,
+
 					player_id: host_strikers[num][:id]
 					})
 			when 6..8
@@ -349,7 +358,13 @@ module SimulationHelper
 		end
 	
 		for i in 1..visitor_goals
-			scorer_position = rand(10)
+			if visitor_strikers.length != 0 and visitor_midfielders.length != 0 and visitor_defenders.length !=0
+				scorer_position = rand(10)
+			elsif visitor_strikers.length == 0
+				scorer_position = rand(4) + 6
+			end
+
+			#scorer_position = rand(10)
 			case scorer_position
 			when 0..5
 				num = rand(visitor_strikers.length)

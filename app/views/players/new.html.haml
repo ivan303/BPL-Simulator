@@ -1,0 +1,32 @@
+%h1 Create a new player
+
+= simple_form_for player do |f|
+  = render 'shared/error_messages', object: f.object
+  .inputs
+    = f.input :firstname
+    = f.input :lastname
+    = f.input :commonname
+    = f.input :position, as: :radio_buttons, collection: [:B, :O, :P, :N]
+    = f.input :overallrating
+
+  .actions
+    = f.button :submit
+
+
+
+
+
+
+/ %h1 Create a new auction
+
+/ = simple_form_for auction do |f|
+/   = render 'shared/error_messages', object: f.object
+/   .inputs
+/     = f.input :title
+/     = f.input :category_id, collection: Category.all
+/     = f.input :description, as: :text
+/     = f.input :auction_type, as: :radio_buttons, collection: [:instant, :classic]
+/     = f.input :price
+/     = f.input :end_date, as: :datetime_picker
+/   .actions
+/     = f.button :submit

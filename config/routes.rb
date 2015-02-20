@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   resources :clubs, only: [:show]
 
-  resources :players, only: [:index, :update]
+  resources :players, only: [:index, :update, :create, :new]
 
   get '/search', to: 'search#show'
 

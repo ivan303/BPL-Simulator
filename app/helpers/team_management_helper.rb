@@ -1,6 +1,11 @@
 module TeamManagementHelper
 	def player_name player
-  		name = player.commonname || player.firstname + ' ' + player.lastname
+      unless player.commonname.blank?
+        player.commonname
+      else
+        player.firstname + ' ' + player.lastname
+      end
+  		# name = player.commonname || player.firstname + ' ' + player.lastname
   	end
 
   	def sort_by_position players

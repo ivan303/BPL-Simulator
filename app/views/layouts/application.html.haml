@@ -31,6 +31,7 @@
                   %li= link_to "Tabel", league_result_path
                   %li= link_to "Transfers", transfers_path
                   %li= link_to "Search players", search_path
+                  %li= link_to "New player", new_player_path
                   %li.divider
                   %li= link_to "End simulation", choose_team_path, method: "delete", data: { confirm: 'Are you sure you want to end simulation?'}
                 -else
@@ -45,4 +46,4 @@
               = message
 
       = yield
-    = debug(params) if Rails.env.development?
+    / = debug(params) if Rails.env.development?

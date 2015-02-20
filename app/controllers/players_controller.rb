@@ -5,6 +5,42 @@ class PlayersController < ApplicationController
 	def index
 	end
 
+	def new
+	end
+
+	def create
+		# byebug
+		# case player_params["position"]
+		# when "goalkeeper"
+		# 	player_params["position"] = "B"
+		# when "defender"
+		# 	player_params["position"] = "O"
+		# end
+		# byebug
+
+
+
+		self.player = Player.new(player_params)
+
+		player.potential = player.overallrating < 98 ? player.overallrating + 2 : player.overallrating
+
+		player.club_id = Club.find_by(name: SeasonInfo.first.club_name).id
+		
+		player.cost = 20000000
+		player.nationality = 'Poland'
+
+		player.id = Player.all.order(:id).last.id + 1
+		byebug
+
+		if player.valid?
+			player.save
+			flash[:notice] = "Players successfully added to your team"
+			redirect_to team_management_path
+		else
+			render 'players/new'
+		end
+	end
+
 	def update
 		my_club = Club.find_by(name: SeasonInfo.first.club_name)
 		player_club = Club.find(player.club_id)
@@ -47,6 +83,10 @@ class PlayersController < ApplicationController
 
 		return filtered
 	end
+
+	def player_params
+    	params.require(:player).permit(:id, :firstname, :lastname, :commonname, :position, :overallrating)
+  	end
 
 
 

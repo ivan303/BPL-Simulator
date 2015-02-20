@@ -18,7 +18,7 @@ class SimulationController < ApplicationController
 				if without_injury
 					# check if goalkeeper on his position
 					if Player.find(@players["id_1"]).position == "B"
-						byebug
+						#byebug
 						simulation @players
 						redirect_to simulation_path	
 					else
