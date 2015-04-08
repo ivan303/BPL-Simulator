@@ -23,7 +23,6 @@ module SimulationHelper
 		matchesInRound.each do |match|
 				
 			if match[:host] == user_club_id 
-				#byebug
 				players1 = players
 				host_offensive_power = power players, "off"
 				host_defensive_power = power players, "def"
@@ -33,7 +32,6 @@ module SimulationHelper
 				visitor_defensive_power = power players2, "def"
 
 			elsif match[:visitor] == user_club_id
-				#byebug
 				players2 = players
 				visitor_offensive_power = power players, "off"
 				visitor_defensive_power = power players, "def"
@@ -43,7 +41,6 @@ module SimulationHelper
 				host_defensive_power = power players1, "def"
 			
 			else
-				#byebug
 				players1 = random_players match[:host]
 				host_offensive_power = power players1, "off"
 				host_defensive_power = power players1, "def"
@@ -53,19 +50,6 @@ module SimulationHelper
 				visitor_defensive_power = power players2, "def"
 			end
 
-				
-			# delete this block later	
-			#byebug
-			puts "Host: " + Club.find(match[:host])[:name]
-			#puts "Host off power: " + host_offensive_power.to_s
-			#puts "Host def power: " + host_defensive_power.to_s
-			puts "Visitor: " + Club.find(match[:visitor])[:name]
-			#puts "Visitor off power: " + visitor_offensive_power.to_s
-			#puts "Visitor def power: " + visitor_defensive_power.to_s
-
-
-
-			# byebug
 			# 
 			# simulatin match result
 			#
@@ -178,18 +162,11 @@ module SimulationHelper
 
 			end
 
-			#byebug
-			puts result
-
 			# simulating transfers
 			make_transfers
 
 
 		end
-
-
-
-
 
 		if SeasonInfo.first[:round] != 39
 			SeasonInfo.first.update(round: round+1)
@@ -228,12 +205,9 @@ module SimulationHelper
 
 					
 					ActiveRecord::Base.connection.execute("SELECT transfer(#{club_from_id},#{club_to_id},#{player_id})")
-					#byebug
+			
 				end
 			end
-
-
-			#puts c.name + ' ' + poss_players.length.to_s
 
 		end
 
@@ -259,7 +233,6 @@ module SimulationHelper
 			while offset2 == offset1
 				offset2 = rand(11)
 			end
-			#byebug
 
 			key1 = 'id_' + (offset1+1).to_s
 			key2 = 'id_' + (offset2+1).to_s
@@ -267,7 +240,6 @@ module SimulationHelper
 			host_players[key2].update(injury: true)
 		elsif injury == 1 or injury == 2
 			offset1 = rand(11)
-			#byebug
 			key1 = 'id_' + (offset1+1).to_s
 			host_players[key1].update(injury: true)
 		end
@@ -279,15 +251,12 @@ module SimulationHelper
 			while offset2 == offset1
 				offset2 = rand(11)
 			end
-			#byebug
-
 
 			key1 = 'id_' + (offset1+1).to_s
 			key2 = 'id_' + (offset2+1).to_s
 			visitor_players[key1].update(injury: true)
 			visitor_players[key2].update(injury: true)
 		elsif injury == 1 or injury == 2
-			#byebug
 			offset1 = rand(11)
 			key1 = 'id_' + (offset1+1).to_s
 			visitor_players[key1].update(injury: true)
@@ -317,23 +286,17 @@ module SimulationHelper
 			end
 		end
 
-		#byebug
-
-
 		for i in 1..host_goals
-			#byebug
+
 			if host_strikers.length != 0 and host_midfielders.length != 0 and host_defenders.length !=0
 				scorer_position = rand(10)
 			elsif host_strikers.length == 0
 				scorer_position = rand(4) + 6
 			end
 				
-
-			#scorer_position = rand(10)
 			case scorer_position
 			when 0..5
 				num = rand(host_strikers.length)
-				byebug
 				Scorer.create({
 					match_id: match_id,
 					club_id: host_id,
@@ -364,7 +327,6 @@ module SimulationHelper
 				scorer_position = rand(4) + 6
 			end
 
-			#scorer_position = rand(10)
 			case scorer_position
 			when 0..5
 				num = rand(visitor_strikers.length)
@@ -393,7 +355,6 @@ module SimulationHelper
 	end
 
 	def power players, power_type
-		#byebug
 
 		goalkeeper = nil
 		defenders = Array.new
@@ -401,12 +362,9 @@ module SimulationHelper
 		strikers = Array.new
 
 		players.each do |key, value|
-			#byebug
-			#player = Player.find(value)
 			player = value
 
 			unless player
-				byebug
 			end
 
 			case player[:position]

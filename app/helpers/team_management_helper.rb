@@ -36,7 +36,6 @@ module TeamManagementHelper
 
   	def without_injury players
   		players_without_injury = []
-  		byebug
   		players.each do |pl|
   			unless pl.injury players_without_injury << pl
   			end

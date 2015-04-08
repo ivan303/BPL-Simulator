@@ -112,25 +112,14 @@ require 'smarter_csv'
 			value.each do |h, v|
 				hostRecord = Club.find_by(:name => h)
 				visitorRecord = Club.find_by(:name => v)
-				# if key == 1
-				# 	puts hostRecord[:id].to_s + ' ' + visitorRecord[:id].to_s
-				# end
 
 				Schedule.create!({
 					:round => key,
 					:host => hostRecord[:id],
 					:visitor => visitorRecord[:id]
 					})
-
-				# Schedule.create!({
-				# 	:round => key,
-				# 	:host => h,
-				# 	:visitor => v
-				# 	})
 			end
 		end
-
-
 
 		return schedule
 	end
@@ -140,17 +129,13 @@ require 'smarter_csv'
 		options = {}
 		SmarterCSV.process(filename, options) do |chunk|
 			chunk.each do |data_hash|
-				puts data_hash
-				#puts data_hash[:id]
-				#puts DateTime.strptime(data_hash[:birthdate] ,"%m/%d/%Y").strftime("%d/%m/%Y")
-				
+				puts data_hash				
 			end
 		end
 	end
 
 	def update_clubs_stats
 		@clubs = Club.all
-		#puts @clubs.class
 		@clubs.each do |c|
 			playersNumber = 0
 			ratingSum = 0

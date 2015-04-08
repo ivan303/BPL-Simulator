@@ -6,7 +6,6 @@ class SimulationController < ApplicationController
 		# w przypadku poprawnych danych wyrenderuje akcję show
 		# w przeciwnym wypadku powróci do okna managera
 
-		#byebug
 		@players = params[:players]
 
 		all_players = !@players.keys.any? { |k| @players[k].blank? }
@@ -18,7 +17,6 @@ class SimulationController < ApplicationController
 				if without_injury
 					# check if goalkeeper on his position
 					if Player.find(@players["id_1"]).position == "B"
-						#byebug
 						simulation @players
 						redirect_to simulation_path	
 					else
@@ -51,20 +49,15 @@ class SimulationController < ApplicationController
 			@scorers[match[:id]][match[:host_club_id]] =  []
 			s1 = Scorer.where(match_id: match[:id], club_id: match[:host_club_id])
 			s1.each do |s|
-				# puts s[:player_id]
-				# p = Player.find(s[:player_id])
 				@scorers[match[:id]][match[:host_club_id]] << TeamManagementController.helpers.player_name(Player.find(s[:player_id]))
 			end
 
 			@scorers[match[:id]][match[:visitor_club_id]] = []
 			s2 = Scorer.where(match_id: match[:id], club_id: match[:visitor_club_id])
 			s2.each do |s|
-				#byebug
 				@scorers[match[:id]][match[:visitor_club_id]] << TeamManagementController.helpers.player_name(Player.find(s[:player_id]))
 			end
 		end
-
-		puts @scorers
 
 	end
 end

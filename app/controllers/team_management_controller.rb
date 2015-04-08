@@ -6,7 +6,6 @@ class TeamManagementController < ApplicationController
 	expose(:players)
 	
 	def show
-		#byebug
 		@info = SeasonInfo.first
 		
 		@chosenClub = Club.find_by(name: @info.club_name)
@@ -18,6 +17,6 @@ class TeamManagementController < ApplicationController
 	end	
 
 	def simulate
-		byebug
+
 	end
 end

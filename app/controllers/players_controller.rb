@@ -9,16 +9,6 @@ class PlayersController < ApplicationController
 	end
 
 	def create
-		# byebug
-		# case player_params["position"]
-		# when "goalkeeper"
-		# 	player_params["position"] = "B"
-		# when "defender"
-		# 	player_params["position"] = "O"
-		# end
-		# byebug
-
-
 
 		self.player = Player.new(player_params)
 
@@ -30,7 +20,6 @@ class PlayersController < ApplicationController
 		player.nationality = 'Poland'
 
 		player.id = Player.all.order(:id).last.id + 1
-		byebug
 
 		if player.valid?
 			player.save

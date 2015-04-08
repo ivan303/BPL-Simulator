@@ -26,34 +26,3 @@
           = f.input :id, as: :radio_buttons, collection: Club.all.order(:name), label_method: lambda { |club| "#{club.name}" }   
         .actions
           = f.button :submit
-
-/ .row
-/   .col-lg-10.col-lg-offset-1
-/     %table.table.table-condensed
-/       %tr
-/         %th= 'Selecting'
-/         %th= 'Team'
-/         %th= 'City'
-/         %th= 'Stadion'
-/         %th= 'Coach'
-/         %th= 'Details' 
-/       -clubs.order(:name).each do |club|
-/         %tr
-/           %td= link_to "Choose", choose_team_controller
-/           %td= club.name
-/           %td= club.stadion.city
-/           %td= club.stadion.name
-/           %td= club.coach.firstname + ' ' + club.coach.lastname
-/           %td= link_to "Show", club_path(club[:id]), class: 'btn btn-primary'
-
-/ .row
-/   .col-lg-10.col-lg-offset-1
-/     %h3= 'Choose team'
-/ .row
-/   .col-lg-10.col-lg-offset-1
-/     .form_div
-/       = simple_form_for :clubs do |f|
-/         .inputs
-/           = f.input :id, as: :radio_buttons, collection: Club.all.order(:name), label_method: lambda { |club| "#{club.name}" }   
-/         .actions
-/           = f.button :submit
